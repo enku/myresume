@@ -46,7 +46,7 @@ class TestMain(unittest.TestCase):
             yaml_filename = os.path.join(tempdir, "resume.yaml")
 
             with open(yaml_filename, "wb") as yaml_file:
-                    yaml_file.write(resume_yaml.encode("utf-8"))
+                yaml_file.write(resume_yaml.encode("utf-8"))
 
             resume_html = os.path.join(tempdir, "resume.html")
             argv = [yaml_filename, resume_html]
@@ -71,7 +71,7 @@ class TestMain(unittest.TestCase):
             yaml_filename = os.path.join(tempdir, "resume.yaml")
 
             with open(yaml_filename, "wb") as yaml_file:
-                    yaml_file.write(resume_yaml.encode("utf-8"))
+                yaml_file.write(resume_yaml.encode("utf-8"))
 
             resume_pdf = os.path.join(tempdir, "resume.pdf")
             argv = ["--format", "pdf", yaml_filename, resume_pdf]

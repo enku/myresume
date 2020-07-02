@@ -73,6 +73,7 @@ class TestFilterDates(unittest.TestCase):
         self.assertEqual(old[0]["role"], "Chocolatier")
         self.assertEqual(recent[0]["role"], "Programmer")
 
+
 class TestToDate(unittest.TestCase):
     def test_with_only_year(self):
         date_str = "1933"

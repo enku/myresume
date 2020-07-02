@@ -12,6 +12,7 @@ class TestRegexReplace(unittest.TestCase):
         expected = "To code or not to be? That is the question."
         self.assertEqual(output, expected)
 
+
 class TestPrettyUrl(unittest.TestCase):
     def test_url_with_non_standard_port(self):
         url = "http://bighost.invalid:8080/foo/"
