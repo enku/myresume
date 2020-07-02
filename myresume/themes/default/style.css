@@ -1,0 +1,151 @@
+* {
+  box-sizing: border-box;
+  margin: 0.5em auto;
+  moz-box-sizing: border-box;
+  padding: 0;
+}
+
+html {
+  margin: 0.25in 0.60in;
+}
+
+body {
+  background-color: white;
+  color: black;
+  font-family: "Telex", "Arial", "Verdana", sans-serif;
+  font-size: 11pt;
+  margin: auto;
+  width: 8.5in;
+}
+
+#logo {
+  background-image: url('{{ logo }}');
+  background-size: 100% auto;
+  display: table-cell;
+  height: 64px;
+  position: absolute;
+  top: 0;
+  width: 64px;
+}
+
+#name {
+  font-family: "Noto Serif", "Bitstream Vera", serif;
+  font-size: 270%;
+  font-variant: small-caps;
+  letter-spacing: 0.2em;
+  margin: 0 !important;
+  text-align: center;
+}
+
+#headline {
+  border-top: 1px solid #a9a9a9;
+  font-family: "Telex", "Arial", "Verdana", sans-serif;
+  font-size: 120%;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  padding: 0.5em 0;
+  text-align: center;
+}
+
+#contactInfo {
+  font-size: 120%;
+  white-space: pre;
+  width: 100%;
+}
+
+#contactInfo #contactOther {
+  text-align: right;
+}
+
+#contactInfo .mini {
+  text-align: center;
+}
+
+.heading {
+  font-family: "Telex", "Arial", "Verdana", sans-serif;
+  font-size: 120%;
+  font-weight: bold;
+  text-align: center;
+}
+
+#skillset td {
+  vertical-align: top;
+}
+
+#skillset .category {
+  font-family: "Telex", "Arial", "Verdana", sans-serif;
+  font-weight: bold;
+  width: 20%;
+}
+
+.job {
+  margin-bottom: 2em;
+}
+
+.olderEntries table {
+  margin: 2em;
+  width: 85%;
+}
+
+.olderEntries td {
+  font-size: smaller;
+  vertical-align: top;
+}
+
+.job table {
+  border-top: 1px solid #a9a9a9;
+  margin: 0;
+  width: 100%;
+}
+
+.job div {
+  margin: 0;
+}
+
+.job_title {
+  font-size: 120%;
+  font-weight: bold;
+}
+
+.job tr {
+  border-top: 1px solid #a9a9a9;
+}
+
+.job .minor {
+  color: #606060;
+  text-align: right;
+}
+
+.job p {
+  margin-bottom: 1.5em;
+}
+
+#affiliations li {
+  list-style: none;
+}
+
+a {
+  color: #606060;
+  text-decoration: none;
+}
+
+li, p {
+  text-align: justify;
+  text-justification: newspaper;
+}
+
+ul {
+    padding-left: 1.4em;
+}
+
+.company_name a {
+  color: #606060;
+}
+
+@media print {
+  .page-break { display: block; page-break-before: always; }
+
+  .ancient-history {
+    display: none;
+  }
+}

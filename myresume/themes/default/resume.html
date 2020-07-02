@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="myresume 0.0.1" />
+    <base target="_blank" />
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif%7CTelex" rel="stylesheet">
+    <title>{{ name.given }} {{ name.surname }}</title>
+    <style type="text/css">
+{%- filter indent(width=8) %}
+{% include "style.css" %}
+{%- endfilter %}
+    </style>
+  </head>
+  <body>
+    <div id="name"><div id="logo"></div>{{ name.given }} {{ name.middle }} {{ name.surname }}</div>
+    <div id="headline">{{ headline }}</div>
+
+    {%- if summary %}
+    <div id="summary">
+      {{ summary|indent(6) }}
+    </div>
+    {% endif -%}
+
+    <table id="contactInfo">
+      <tr>
+        {%- if not meta.public %}
+        <td id="addressInfo">
+          {{- contactInfo.address }}
+          {% if contactInfo.phone %}{{ contactInfo.phone }}{% endif %}
+        </td>
+        <td id="contactOther">
+          {% for link in links -%}
+          <a href="{{ link.url }}">{{ link.url|pretty_url() }}</a>
+          {% endfor -%}
+          {%- else -%}
+          <td class="mini">
+            {% for link in links %}{% if not loop.first %} • {% endif %}<a href="{{ link.url }}">{{ link.url|pretty_url() }}</a>{% endfor %}
+          </td>
+          {%- endif %}
+        </td>
+      </tr>
+    </table>
+
+    {% for section in sections -%}
+    <div class="heading">{{ section.title }}</div>
+    {%- for job in section.entries %}
+    <div class="job">
+      <table>
+        <tr>
+          <td>
+            <div class="job_title">{{ job.role }}</div>
+            <div class="company_name"><a href="{{ job.url }}">{{ job.org }}</a></div>
+          </td>
+          <td class="minor">
+            <div class="job_location">{{ job.location }}</div>
+            <div class="job_dates">{{ job.from }} to {{ job.to|default("Present") }}</div>
+          </td>
+        </tr>
+      </table>
+      <p>
+      {{ job.description|indent(6) }}
+      </p>
+
+      {% if job.duties -%}
+      <ul class="duties">
+        {%- for duty in job.duties %}
+        <li>
+          {{ duty|indent(10) }}
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    {%- endfor -%}
+
+    {% if meta.summarizeOld and section.olderEntries %}
+    <div class="olderEntries">
+      <div class="heading">Additional {{ section.title }}</div>
+      <table>
+        {% for job in section.olderEntries %}
+        <tr>
+          <td>
+            {{ job.role }}
+          </td>
+          <td>
+            <a href="{{ job.url }}">{{ job.org }}</a>
+          </td>
+          <td>
+            {% if job.location %}{{ job.location }}{% endif %}
+          </td>
+          <td>
+            {{ job.from }} - {{ job.to|default("Present") }}
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    {%- endif %}
+    {%- endfor %}
+
+    <div class="heading">Education</div>
+    {% for school in education -%}
+    <div class="job">
+      <table>
+        <tr>
+          <td>
+            <div class="company_name job_title"><a href="{{ school.url }}">{{ school.institution }}</a></div>
+          </td>
+          <td class="minor">
+            <div class="job_location">{{ school.location }}</div>
+          </td>
+        </tr>
+      </table>
+      <p>
+      {{ school.degree|indent(6) }}
+      </p>
+    </div>
+    {%- endfor %}
+  </body>
+</html>

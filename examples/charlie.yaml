@@ -1,0 +1,47 @@
+meta:
+  public: false
+  since: 2007
+name:
+  given: Charlie
+  surname: Bucket
+contactInfo:
+  address: |
+    1 Main St
+    Anytown, USA 00000
+links:
+- name: Tel
+  url: tel:212-555-1212
+- name: Social
+  url: https://spitter.invalid/charlie/
+headline: Jack of all Trades
+summary: |
+  Given the chance, and the need to survive, I can accomplish just about anything.
+
+sections:
+- title: Professional Experience
+  entries:
+  - role: Programmer
+    org: ACME Computer
+    location: Seattle, WA
+    from: February 2016
+    description: Mash keys and hope for the best
+    duties:
+      - Replaced tired old bugs with new exciting ones
+      - Wrote documentation that no one ever read
+      - Pledged allegience to stackoverflow
+
+  - role: Chocolatier
+    org: Willy Wonka's Chocolate Factory
+    location: Munich, Germany
+    from: June 1971
+    to: August 2016
+    description: Head taste tester 🍫
+    duties:
+      - Produced the Food of the Gods
+      - Cleaned up a lot of empty wrappers
+      - Felt tall for once
+
+education:
+  - institution: School of Hard Knocks
+    location: Real World
+    degree: Master of Life

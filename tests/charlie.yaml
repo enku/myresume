@@ -1,0 +1,30 @@
+contactInfo:
+  address: |
+    1212 American Ave
+    Anytown, USA 00000
+  phone: 212-555-1212
+links:
+- name: Tel
+  url: tel:212-555-1212
+- name: Social
+  url: https://spitter.invalid/charlie/
+meta:
+  public: false
+  since: 2007
+name:
+  given: Charlie
+  surname: Bucket
+sections:
+- entries:
+  - description: Mash keys and hope for the best
+    from: February 2016
+    location: Seattle, WA
+    org: ACME Computer
+    role: Programmer
+  - description: Head taste tester 🍫
+    from: June 1971
+    location: Munich, Germany
+    org: Willy Wonka's Chocolate Factory
+    role: Chocolatier
+    to: August 2016
+  name: Professional Experience
