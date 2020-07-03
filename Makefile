@@ -20,16 +20,19 @@ $(wheel): $(sources)
 	$(python) setup.py bdist_wheel
 
 
+.PHONY: venv
+venv: $(venv)
+
 $(venv): setup.py
 	$(python) -m venv .venv
-	$(python) -m pip install --upgrade coverage pip wheel
+	$(python) -m pip install --upgrade coverage pip wheel black pylint mypy isort
 	$(python) -m pip install --upgrade --editable .
 	touch $@
 
 
 .PHONY: test
 test: $(venv)
-	coverage run --source=$(package) -m unittest discover --failfast tests
+	coverage run --source=$(package) -m unittest discover --verbose --failfast tests
 	coverage report
 
 
