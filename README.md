@@ -48,6 +48,6 @@ Typical usage:
 
 ```sh
 myresume resume.yaml resume.html
-myresume --output pdf resume.yaml resume.pdf
+myresume --format pdf resume.yaml resume.pdf
 myresume --public resume.yaml public_resume.html
 ```
