@@ -76,7 +76,9 @@ class TestFilterDates(unittest.TestCase):
 
 class TestToDate(unittest.TestCase):
     def test_with_only_year(self):
-        date_str = "1933"
+        # If reading from YAML, if the value is just a year and isn't quoted then it's
+        # actually an int
+        date_str = 1933
 
         dt_object = myresume.to_date(date_str)
 

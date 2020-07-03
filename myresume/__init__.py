@@ -2,6 +2,7 @@
 import datetime
 import locale
 import subprocess
+from typing import Union
 from urllib.parse import urlparse
 
 from jinja2 import Environment, PackageLoader, select_autoescape
@@ -96,13 +97,15 @@ def filter_dates(entries: list, since: int):
     return divided
 
 
-def to_date(date_str: str) -> datetime.date:
-    """Convert `date_string` to datetime.
+def to_date(date_spec: Union[int, str]) -> datetime.date:
+    """Convert `date_spec` to datetime.
 
-    `date_string` must be either of the format:
-        - Month Year (e.g. January 1969)
-        - Year (e.g. 1969)
+    `date_spec` must be either of the format:
+        - Month Year (e.g. `"January 1969"`)
+        - Year (e.g. `1969`)
     """
+    date_str = str(date_spec)
+
     if " " not in date_str:
         # presume January
         date_str = f"{JANUARY} {date_str}"
