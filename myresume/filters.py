@@ -18,13 +18,8 @@ def pretty_url(url: str) -> str:
 
     address, colon, port = parsed.netloc.partition(":")
 
-    if colon:
-        if (parsed.scheme == "http" and port == "80") or (
-            parsed.scheme == "https" and port == "443"
-        ):
-            address = address
-        else:
-            address = f"{address}:{port}"
+    if colon and (parsed.scheme, port) not in [("http", "80"), ("https", "443")]:
+        address = f"{address}:{port}"
 
     if parsed.scheme == "tel":
         path = path.replace("-", "•")

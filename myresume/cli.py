@@ -52,8 +52,11 @@ def parse_args(argv) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
-def main(argv=sys.argv[1:]) -> Tuple[Resume, argparse.Namespace]:
+def main(argv=None) -> Tuple[Resume, argparse.Namespace]:
     """Entry point"""
+    if argv is None:  # pragma: no cover
+        argv = sys.argv[1:]
+
     args = parse_args(argv)
 
     resume_struct = yaml.load(args.input, Loader=yaml.SafeLoader)
