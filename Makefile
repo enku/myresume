@@ -5,6 +5,7 @@ sdist := dist/$(package)-$(version).tar.gz
 wheel := dist/$(package)-$(version)-py3-none-any.whl
 sources := setup.py $(shell find $(package) -type f -print)
 venv := .venv/.dirstate
+venv_packages := black coverage mypy pip pyenchant pylint wheel
 
 export PATH := $(CURDIR)/.venv/bin:$(PATH)
 
@@ -25,7 +26,7 @@ venv: $(venv)
 
 $(venv): setup.py
 	$(python) -m venv .venv
-	$(python) -m pip install --upgrade coverage pip wheel black pylint mypy isort
+	$(python) -m pip install --upgrade $(venv_packages)
 	$(python) -m pip install --upgrade --editable .
 	touch $@
 
