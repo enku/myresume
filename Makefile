@@ -37,5 +37,11 @@ test: $(venv)
 	coverage report
 
 
+.PHONY: lint
+lint: $(venv)
+	pylint --rcfile=.pylintrc myresume
+	mypy myresume
+
+
 clean:
 	rm -rf .coverage .venv build dist htmlcov
