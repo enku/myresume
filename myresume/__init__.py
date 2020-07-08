@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
+"""
+myresume is a program to convert a resume definition in YAML to HTML or PDF.
+"""
 import datetime
 import locale
 import subprocess
-from typing import Union
+from typing import List, Tuple, Union
 from urllib.parse import urlparse
 
 from jinja2 import Environment, PackageLoader, select_autoescape
@@ -44,7 +47,7 @@ class Resume:
         ]
 
     def to_html(self, theme="default") -> str:
-        """Return Resume as html"""
+        """Return Resume as HTML"""
         env = Environment(
             loader=PackageLoader("myresume", f"themes/{theme}"),
             autoescape=select_autoescape(["html"]),
@@ -74,10 +77,14 @@ class Resume:
         process = subprocess.Popen(
             command, stdin=subprocess.PIPE, stdout=subprocess.PIPE
         )
+        assert process.stdin is not None
         process.stdin.write(html.encode("utf-8"))
         process.stdin.close()
+
+        assert process.stdout is not None
         pdf = process.stdout.read()
         process.stdout.close()
+
         process.wait()
 
         return pdf
@@ -88,7 +95,7 @@ def filter_dates(entries: list, since: int):
     """
     from_date = datetime.date(year=since, month=1, day=1)
 
-    divided = ([], [])  # recent, older
+    divided: Tuple[List, List] = ([], [])  # recent, older
 
     for entry in entries:
         index = 0 if to_date(entry["from"]) >= from_date else 1

@@ -1,7 +1,6 @@
 """Command line interfaces"""
 import argparse
 import sys
-from typing import Tuple
 
 import pkg_resources
 import yaml
@@ -52,7 +51,7 @@ def parse_args(argv) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
-def main(argv=None) -> Tuple[Resume, argparse.Namespace]:
+def main(argv=None) -> int:
     """Entry point"""
     if argv is None:  # pragma: no cover
         argv = sys.argv[1:]
