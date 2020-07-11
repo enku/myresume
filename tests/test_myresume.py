@@ -82,6 +82,12 @@ class TestResume(unittest.TestCase):
 
         self.assertEqual(str(resume), resume.to_html())
 
+    def test_context_should_contain_myresume_version(self):
+        resume = myresume.Resume(RESUME_STRUCT)
+
+        expected = myresume.version()
+        self.assertEqual(resume.resume["meta"]["myresume"]["version"], expected)
+
 
 class TestFilterDates(unittest.TestCase):
     def test(self):

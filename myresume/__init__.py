@@ -9,6 +9,7 @@ from typing import List, Tuple, Union
 from urllib.parse import urlparse
 
 from jinja2 import Environment, PackageLoader, select_autoescape
+import pkg_resources
 
 from . import filters
 
@@ -31,6 +32,10 @@ class Resume:
                 section["entries"], section["olderEntries"] = filter_dates(
                     section["entries"], self.resume["meta"]["since"]
                 )
+
+        self.resume["meta"]["myresume"] = {
+            "version": version(),
+        }
 
         if self.resume["meta"]["public"]:
             self._filter_private()
@@ -118,3 +123,8 @@ def to_date(date_spec: Union[int, str]) -> datetime.date:
         date_str = f"{JANUARY} {date_str}"
 
     return datetime.datetime.strptime(date_str, "%B %Y").date()
+
+
+def version() -> str:
+    """Return the version of myresume"""
+    return pkg_resources.get_distribution("myresume").version
