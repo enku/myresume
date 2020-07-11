@@ -1,6 +1,5 @@
 """Tests for the cli functions"""
 import os.path
-import sys
 import tempfile
 import unittest
 from unittest.mock import patch
