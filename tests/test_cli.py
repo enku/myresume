@@ -3,6 +3,7 @@ import os.path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 import yaml
 
@@ -75,7 +76,10 @@ class TestMain(unittest.TestCase):
 
             resume_pdf = os.path.join(tempdir, "resume.pdf")
             argv = ["--format", "pdf", yaml_filename, resume_pdf]
-            status = cli.main(argv)
+
+            with patch.object(cli.Resume, "to_pdf") as mock_to_pdf:
+                mock_to_pdf.return_value = b"%PDF-1.4"
+                status = cli.main(argv)
 
             self.assertTrue(os.path.exists(resume_pdf))
 
