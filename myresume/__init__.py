@@ -25,29 +25,29 @@ class Resume:
     """Resume object instantiated from a dict"""
 
     def __init__(self, struct: dict):
-        self.resume = struct.copy()
+        self.context = struct.copy()
 
-        if self.resume["meta"]["since"] is not None:
-            for section in self.resume["sections"]:
+        if self.context["meta"]["since"] is not None:
+            for section in self.context["sections"]:
                 section["entries"], section["olderEntries"] = filter_dates(
-                    section["entries"], self.resume["meta"]["since"]
+                    section["entries"], self.context["meta"]["since"]
                 )
 
-        self.resume["meta"]["myresume"] = {
+        self.context["meta"]["myresume"] = {
             "version": version(),
         }
 
-        if self.resume["meta"]["public"]:
+        if self.context["meta"]["public"]:
             self._filter_private()
 
     def _filter_private(self):
         """Filter "private" data out of the resume struct"""
-        resume = self.resume
+        context = self.context
 
-        resume["contactInfo"]["address"] = ""
-        resume["links"] = [
+        context["contactInfo"]["address"] = ""
+        context["links"] = [
             link
-            for link in resume["links"]
+            for link in context["links"]
             if urlparse(link["url"]).scheme not in PRIVATE_URL_SCHEMES
         ]
 
@@ -61,7 +61,7 @@ class Resume:
         env.filters["pretty_url"] = filters.pretty_url
         template = env.get_template("resume.html")
 
-        return template.render(self.resume)
+        return template.render(self.context)
 
     def __str__(self) -> str:
         return self.to_html()

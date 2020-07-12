@@ -21,7 +21,7 @@ class TestResume(unittest.TestCase):
     def test_init_saves_copy_of_struct(self):
         resume = myresume.Resume(RESUME_STRUCT)
 
-        self.assertIsNot(RESUME_STRUCT, resume.resume)
+        self.assertIsNot(RESUME_STRUCT, resume.context)
 
     def test_to_html_renders_html(self):
         resume = myresume.Resume(RESUME_STRUCT)
@@ -69,11 +69,11 @@ class TestResume(unittest.TestCase):
     def test_privacy_filter(self):
         struct = RESUME_STRUCT.copy()
         struct["meta"]["public"] = True
-        resume = myresume.Resume(struct).resume
+        context = myresume.Resume(struct).context
 
-        self.assertEqual(resume["contactInfo"]["address"], "")
+        self.assertEqual(context["contactInfo"]["address"], "")
         self.assertEqual(
-            resume["links"],
+            context["links"],
             [{"name": "Social", "url": "https://spitter.invalid/charlie/"}],
         )
 
@@ -86,7 +86,7 @@ class TestResume(unittest.TestCase):
         resume = myresume.Resume(RESUME_STRUCT)
 
         expected = myresume.version()
-        self.assertEqual(resume.resume["meta"]["myresume"]["version"], expected)
+        self.assertEqual(resume.context["meta"]["myresume"]["version"], expected)
 
 
 class TestFilterDates(unittest.TestCase):
