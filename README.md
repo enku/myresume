@@ -1,7 +1,7 @@
 # myresume
 
 This is a program to convert a résumé definition in YAML to HTML or PDF (with the
-help of [wkhtmltopdf](https://wkhtmltopdf.org/).
+help of [wkhtmltopdf](https://wkhtmltopdf.org/)).
 
 This is not **my** résumé (though that is available upon request).
 
