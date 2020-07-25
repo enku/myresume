@@ -142,6 +142,10 @@ ul {
   color: #606060;
 }
 
+.hidden {
+  display: none;
+}
+
 @media print {
   .page-break { display: block; page-break-before: always; }
 

@@ -42,6 +42,12 @@
       </tr>
     </table>
 
+    <ul class="skills hidden">
+      {% for skill in skills -%}
+      <li>{{ skill }}</li>
+      {% endfor %}
+    </ul>
+
     {% for section in sections -%}
     <div class="heading">{{ section.title }}</div>
     {%- for job in section.entries %}
