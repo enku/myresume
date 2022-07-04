@@ -1,3 +1,35 @@
+[project]
+name = "myresume"
+dynamic = ["version"]
+description = "Create resumes from YAML description files"
+readme = "README.md"
+authors = [{name = "Albert Hopkins", email = "marduk@letterboxes.org"}]
+license = {text = "GPLv3"}
+classifiers = [
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3"
+]
+requires-python = ">=3.6"
+dependencies = [
+    "Jinja2~=2.11.2",
+    "PyYAML~=5.3.1",
+    "setuptools",
+]
+
+[project.urls]
+homepage = "https://github.com/enku/myresume"
+repository = "https://github.com/enku/myresume"
+
+[project.optional-dependencies]
+dev = ["coverage"]
+
+[project.scripts]
+myresume = "myresume.cli:main"
+
+[project.entry-points."myresume.themes"]
+default = "myresume.themes.default"
+
 [build-system]
 requires = [
     "setuptools>=42",
