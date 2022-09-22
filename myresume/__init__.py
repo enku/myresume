@@ -3,16 +3,15 @@
 myresume is a program to convert a resume definition in YAML to HTML or PDF.
 """
 import datetime
+import importlib.metadata
 import locale
 import subprocess
 from typing import List, Tuple, Union
 from urllib.parse import urlparse
 
 from jinja2 import Environment, PackageLoader, select_autoescape
-import pkg_resources
 
 from . import filters
-
 
 # Current locale for "January"
 JANUARY = locale.nl_langinfo(locale.MON_1)
@@ -126,4 +125,4 @@ def to_date(date_spec: Union[int, str]) -> datetime.date:
 
 def version() -> str:
     """Return the version of myresume"""
-    return pkg_resources.get_distribution("myresume").version
+    return importlib.metadata.distribution("myresume").version

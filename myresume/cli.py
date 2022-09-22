@@ -1,14 +1,14 @@
 """Command line interfaces"""
 import argparse
+import importlib.metadata
 import sys
 
-import pkg_resources
 import yaml
 
 from . import Resume
 
 # List of included themes
-THEMES = [i.name for i in pkg_resources.iter_entry_points("myresume.themes")]
+THEMES = [i.name for i in importlib.metadata.entry_points(group="myresume.themes")]
 
 # Output formats
 OUTPUT_CHOICES = ["html", "pdf"]
