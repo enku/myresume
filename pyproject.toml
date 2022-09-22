@@ -21,7 +21,12 @@ homepage = "https://github.com/enku/myresume"
 repository = "https://github.com/enku/myresume"
 
 [project.optional-dependencies]
-dev = ["coverage"]
+dev = [
+    "coverage>=6.4.4",
+    "black>=22.8.0",
+    "mypy>=0.971",
+    "pylint>=2.15.3",
+]
 
 [project.scripts]
 myresume = "myresume.cli:main"
@@ -31,11 +36,12 @@ default = "myresume.themes.default"
 
 [build-system]
 requires = [
-    "setuptools>=42",
-    "setuptools_scm[toml]>=3.4",
-    "wheel"
+    "pdm-pep517>=1.0.0"
 ]
 
-build-backend = "setuptools.build_meta"
+build-backend = "pdm.pep517.api"
 
 [tool.setuptools_scm]
+
+[tool.pdm]
+[tool.pdm.dev-dependencies]

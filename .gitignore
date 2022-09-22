@@ -1,5 +1,7 @@
 /.coverage
 /.eggs/
+/.pdm.toml
 /.venv/
+/__pypackages__/
 /htmlcov/
 myresume.egg-info/
