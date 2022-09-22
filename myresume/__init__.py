@@ -96,8 +96,7 @@ class Resume:
 
 
 def filter_dates(entries: list, since: int):
-    """Divide `entries` into "current" and "older" according to `since`
-    """
+    """Divide `entries` into "current" and "older" according to `since`"""
     from_date = datetime.date(year=since, month=1, day=1)
 
     divided: Tuple[List, List] = ([], [])  # recent, older

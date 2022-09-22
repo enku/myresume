@@ -18,7 +18,10 @@ def parse_args(argv) -> argparse.Namespace:
     """Parse command-line arguments"""
     parser = argparse.ArgumentParser(description="convert resume to html")
     parser.add_argument(
-        "--since", type=int, help="Filter out entries before this year", dest="since",
+        "--since",
+        type=int,
+        help="Filter out entries before this year",
+        dest="since",
     )
     parser.add_argument(
         "--format",
@@ -42,10 +45,14 @@ def parse_args(argv) -> argparse.Namespace:
         help="Page size (e.g. for PDF)",
     )
     parser.add_argument(
-        "input", type=argparse.FileType("r"), default=sys.stdin,
+        "input",
+        type=argparse.FileType("r"),
+        default=sys.stdin,
     )
     parser.add_argument(
-        "output", type=argparse.FileType("wb"), default=sys.stdout.buffer,
+        "output",
+        type=argparse.FileType("wb"),
+        default=sys.stdout.buffer,
     )
 
     return parser.parse_args(argv)
