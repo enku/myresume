@@ -20,14 +20,6 @@ dependencies = [
 homepage = "https://github.com/enku/myresume"
 repository = "https://github.com/enku/myresume"
 
-[project.optional-dependencies]
-dev = [
-    "coverage>=6.4.4",
-    "black>=22.8.0",
-    "mypy>=0.971",
-    "pylint>=2.15.3",
-]
-
 [project.scripts]
 myresume = "myresume.cli:main"
 
@@ -45,3 +37,9 @@ build-backend = "pdm.pep517.api"
 
 [tool.pdm]
 [tool.pdm.dev-dependencies]
+dev = [
+    "coverage>=6.4.4",
+    "black>=22.8.0",
+    "mypy>=0.971",
+    "pylint>=2.15.3",
+]
