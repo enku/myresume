@@ -1,5 +1,7 @@
 /.coverage
 /.eggs/
+/.envrc
+/.pdm-python
 /.pdm.toml
 /.venv/
 /__pypackages__/
