@@ -33,8 +33,6 @@ requires = [
 
 build-backend = "pdm.pep517.api"
 
-[tool.setuptools_scm]
-
 [tool.pdm]
 [tool.pdm.dev-dependencies]
 dev = [
@@ -42,4 +40,5 @@ dev = [
     "black>=22.8.0",
     "mypy>=0.971",
     "pylint>=2.15.3",
+    "types-PyYAML>=6.0.12.12",
 ]
