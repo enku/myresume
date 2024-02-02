@@ -5,7 +5,7 @@ myresume is a program to convert a resume definition in YAML to HTML or PDF.
 import datetime
 import importlib.metadata
 import locale
-import subprocess
+import subprocess as sp
 from typing import List, Tuple, Union
 from urllib.parse import urlparse
 
@@ -78,18 +78,16 @@ class Resume:
             "-",
             "-",
         ]
-        process = subprocess.Popen(
-            command, stdin=subprocess.PIPE, stdout=subprocess.PIPE
-        )
-        assert process.stdin is not None
-        process.stdin.write(html.encode("utf-8"))
-        process.stdin.close()
+        with sp.Popen(command, stdin=sp.PIPE, stdout=sp.PIPE) as process:
+            assert process.stdin is not None
+            process.stdin.write(html.encode("utf-8"))
+            process.stdin.close()
 
-        assert process.stdout is not None
-        pdf = process.stdout.read()
-        process.stdout.close()
+            assert process.stdout is not None
+            pdf = process.stdout.read()
+            process.stdout.close()
 
-        process.wait()
+            process.wait()
 
         return pdf
 
