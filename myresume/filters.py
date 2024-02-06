@@ -2,6 +2,7 @@
 
 These are Jinja2 template filters that can be used in theme templates.
 """
+
 from urllib.parse import urlparse, unquote
 import re
 

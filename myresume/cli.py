@@ -1,4 +1,5 @@
 """Command line interfaces"""
+
 import argparse
 import importlib.metadata
 import sys

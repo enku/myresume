@@ -1,4 +1,5 @@
 """Tests for the cli functions"""
+
 import os.path
 import tempfile
 import unittest

@@ -1,4 +1,5 @@
 """Tests for the Jinja2 filters"""
+
 import unittest
 
 from myresume import filters

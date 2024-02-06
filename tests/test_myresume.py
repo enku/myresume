@@ -40,7 +40,8 @@ class TestResume(unittest.TestCase):
             result = resume.to_pdf()
 
         self.assertTrue(
-            result.startswith(b"%PDF-1.4\n"), "Output looks weird: %s..." % result[:9],
+            result.startswith(b"%PDF-1.4\n"),
+            "Output looks weird: %s..." % result[:9],
         )
         mock_popen.assert_called_once_with(
             [
