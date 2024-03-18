@@ -35,7 +35,7 @@ class TestResume(unittest.TestCase):
     def test_to_pdf_renders_pdf(self):
         resume = myresume.Resume(RESUME_STRUCT)
 
-        with patch.object(myresume.subprocess, "Popen") as mock_popen:
+        with patch.object(myresume.sp, "Popen") as mock_popen:
             mock_popen.return_value.stdout.return_value = b"%PDF-1.4\n"
             result = resume.to_pdf()
 
