@@ -57,7 +57,7 @@ class TestResume(unittest.TestCase):
             stdout=subprocess.PIPE,
         )
         html = resume.to_html()
-        mock_popen.return_value.stdin.write.assert_called_once_with(
+        mock_popen.return_value.__enter__.return_value.stdin.write.assert_called_once_with(
             html.encode("utf-8")
         )
 
