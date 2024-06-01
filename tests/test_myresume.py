@@ -1,3 +1,4 @@
+# pylint: disable=missing-docstring
 import datetime
 import locale
 import os.path
@@ -11,7 +12,7 @@ import myresume
 
 PATH = os.path.dirname(__file__)
 
-with open(os.path.join(PATH, "charlie.yaml")) as fp:
+with open(os.path.join(PATH, "charlie.yaml"), encoding="UTF8") as fp:
     RESUME_STRUCT = yaml.load(fp, Loader=yaml.SafeLoader)
 
 locale.setlocale(locale.LC_ALL, "en_US")
@@ -29,7 +30,7 @@ class TestResume(unittest.TestCase):
 
         self.assertTrue(
             result.startswith("<!DOCTYPE html>"),
-            "Output looks weird: %s..." % result[:20],
+            f"Output looks weird: {result[:20]}...",
         )
 
     def test_to_pdf_renders_pdf(self):
@@ -40,8 +41,7 @@ class TestResume(unittest.TestCase):
             result = resume.to_pdf()
 
         self.assertTrue(
-            result.startswith(b"%PDF-1.4\n"),
-            "Output looks weird: %s..." % result[:9],
+            result.startswith(b"%PDF-1.4\n"), f"Output looks weird: {result[:9]}..."
         )
         mock_popen.assert_called_once_with(
             [
