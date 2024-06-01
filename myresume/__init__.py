@@ -4,11 +4,13 @@ myresume is a program to convert a resume definition in YAML to HTML or PDF.
 """
 import datetime
 import importlib.metadata
+import io
 import locale
-import subprocess as sp
 from typing import List, Tuple, Union
 from urllib.parse import urlparse
 
+import weasyprint
+import weasyprint.text.fonts
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 from . import filters
@@ -67,29 +69,15 @@ class Resume:
 
     def to_pdf(self, theme="default", pagesize="Letter") -> bytes:
         """Return Resume as a PDF document"""
-        html = self.to_html(theme)
+        html = weasyprint.HTML(string=self.to_html(theme))
+        css = weasyprint.CSS(string=f"@page {{ size: {pagesize} }}")
+        font_config = weasyprint.text.fonts.FontConfiguration()
+        document = html.render(font_config=font_config, stylesheets=[css])
+        target = io.BytesIO()
 
-        command = [
-            "wkhtmltopdf",
-            "--quiet",
-            "--page-size",
-            pagesize,
-            "--print-media-type",
-            "-",
-            "-",
-        ]
-        with sp.Popen(command, stdin=sp.PIPE, stdout=sp.PIPE) as process:
-            assert process.stdin is not None
-            process.stdin.write(html.encode("utf-8"))
-            process.stdin.close()
+        document.write_pdf(target)
 
-            assert process.stdout is not None
-            pdf = process.stdout.read()
-            process.stdout.close()
-
-            process.wait()
-
-        return pdf
+        return target.getvalue()
 
 
 def filter_dates(entries: list, since: int):

@@ -5,8 +5,8 @@
   padding: 0;
 }
 
-html {
-  margin: 0.25in 0.60in;
+@page {
+  margin: 0.50in 0.60in;
 }
 
 body {
@@ -14,8 +14,6 @@ body {
   color: black;
   font-family: "Telex", "Arial", "Verdana", sans-serif;
   font-size: 11pt;
-  margin: auto;
-  width: 8.5in;
 }
 
 #logo {

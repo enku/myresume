@@ -2,9 +2,7 @@
 import datetime
 import locale
 import os.path
-import subprocess
 import unittest
-from unittest.mock import patch
 
 import yaml
 
@@ -35,30 +33,10 @@ class TestResume(unittest.TestCase):
 
     def test_to_pdf_renders_pdf(self):
         resume = myresume.Resume(RESUME_STRUCT)
-
-        with patch.object(myresume.sp, "Popen") as mock_popen:
-            mock_popen.return_value.stdout.return_value = b"%PDF-1.4\n"
-            result = resume.to_pdf()
+        result = resume.to_pdf()
 
         self.assertTrue(
-            result.startswith(b"%PDF-1.4\n"), f"Output looks weird: {result[:9]}..."
-        )
-        mock_popen.assert_called_once_with(
-            [
-                "wkhtmltopdf",
-                "--quiet",
-                "--page-size",
-                "Letter",
-                "--print-media-type",
-                "-",
-                "-",
-            ],
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-        )
-        html = resume.to_html()
-        mock_popen.return_value.__enter__.return_value.stdin.write.assert_called_once_with(
-            html.encode("utf-8")
+            result.startswith(b"%PDF-1.7\n"), f"Output looks weird: {result[:9]}..."
         )
 
     def test_date_filter(self):
