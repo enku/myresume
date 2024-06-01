@@ -87,7 +87,8 @@ def filter_dates(entries: list, since: int):
     divided: Tuple[List, List] = ([], [])  # recent, older
 
     for entry in entries:
-        index = 0 if to_date(entry["from"]) >= from_date else 1
+        ongoing = entry.get("to", "Present") == "Present"
+        index = 0 if ongoing or to_date(entry["from"]) >= from_date else 1
         divided[index].append(entry)
 
     return divided

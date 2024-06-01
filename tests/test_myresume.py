@@ -3,6 +3,7 @@ import datetime
 import locale
 import os.path
 import unittest
+from copy import deepcopy
 
 import yaml
 
@@ -79,6 +80,14 @@ class TestFilterDates(unittest.TestCase):
 
         self.assertEqual(old[0]["role"], "Chocolatier")
         self.assertEqual(recent[0]["role"], "Programmer")
+
+    def test_when_to_is_present_goes_to_current(self):
+        entries = deepcopy(RESUME_STRUCT["sections"][0]["entries"])
+        del entries[-1]["to"]
+
+        recent = myresume.filter_dates(entries, 2007)[0]
+
+        self.assertIn(entries[-1], recent)
 
 
 class TestToDate(unittest.TestCase):
