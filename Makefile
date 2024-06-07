@@ -13,7 +13,7 @@ $(sdist): $(sources)
 
 
 $(wheel): $(sources)
-	pbm build --no-sdist
+	pdm build --no-sdist
 
 
 .PHONY: test
