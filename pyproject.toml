@@ -43,3 +43,6 @@ dev = [
     "pylint>=2.15.3",
     "types-PyYAML>=6.0.12.12",
 ]
+
+[tool.black]
+skip-magic-trailing-comma = true

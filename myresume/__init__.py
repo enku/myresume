@@ -34,9 +34,7 @@ class Resume:
                     section["entries"], self.context["meta"]["since"]
                 )
 
-        self.context["meta"]["myresume"] = {
-            "version": version(),
-        }
+        self.context["meta"]["myresume"] = {"version": version()}
 
         if self.context["meta"]["public"]:
             self._filter_private()
