@@ -12,7 +12,7 @@ from . import Resume
 THEMES = [i.name for i in importlib.metadata.entry_points(group="myresume.themes")]
 
 # Output formats
-OUTPUT_CHOICES = ["html", "pdf"]
+OUTPUT_CHOICES = {"html", "pdf"}
 
 
 def parse_args(argv) -> argparse.Namespace:
