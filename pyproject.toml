@@ -46,3 +46,7 @@ dev = [
 
 [tool.black]
 skip-magic-trailing-comma = true
+
+[tool.coverage.run]
+source = ["myresume"]
+branch = true
