@@ -12,8 +12,10 @@ from myresume import cli
 
 PATH = os.path.dirname(__file__)
 
-with open(os.path.join(PATH, "charlie.yaml"), encoding="utf8") as fp:
-    RESUME_STRUCT = yaml.load(fp, Loader=yaml.SafeLoader)
+with open(os.path.join(PATH, "charlie.yaml"), encoding="utf8") as _fp:
+    RESUME_STRUCT = yaml.load(_fp, Loader=yaml.SafeLoader)
+
+del _fp
 
 
 class TestParseArgs(unittest.TestCase):
