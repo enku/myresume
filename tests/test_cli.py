@@ -93,3 +93,25 @@ class TestMain(unittest.TestCase):
             self.assertEqual(fragment, b"%PDF-1.4")
 
         self.assertEqual(status, 0)
+
+    def test_with_meta(self) -> None:
+        resume_struct = RESUME_STRUCT.copy()
+
+        resume_yaml = yaml.dump(resume_struct)
+
+        with tempfile.TemporaryDirectory() as tempdir:
+            yaml_filename = os.path.join(tempdir, "resume.yaml")
+
+            with open(yaml_filename, "wb") as yaml_file:
+                yaml_file.write(resume_yaml.encode("utf-8"))
+
+            resume_html = os.path.join(tempdir, "resume.html")
+            argv = [yaml_filename, resume_html]
+            status = cli.main(argv)
+
+            self.assertEqual(0, status)
+
+            with open(resume_html, encoding="utf8") as fp:
+                content = fp.read()
+
+            self.assertIn("1971", content)
