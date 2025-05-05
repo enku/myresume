@@ -20,8 +20,8 @@ class TestParseArgs(unittest.TestCase):
     def test(self):
         with tempfile.TemporaryDirectory() as tempdir:
             yaml = os.path.join(tempdir, "myresume.yaml")
-            yaml_file = open(yaml, "w", encoding="utf8")
-            yaml_file.close()
+            with open(yaml, "w", encoding="utf8"):
+                pass
             pdf = os.path.join(tempdir, "myresume.pdf")
 
             argv = ["--format=pdf", "--page-size=A4", "--public", yaml, pdf]
