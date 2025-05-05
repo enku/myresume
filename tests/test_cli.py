@@ -1,4 +1,5 @@
 """Tests for the cli functions"""
+
 # pylint: disable=missing-docstring
 
 import os.path

@@ -3,8 +3,8 @@
 These are Jinja2 template filters that can be used in theme templates.
 """
 
-from urllib.parse import urlparse, unquote
 import re
+from urllib.parse import unquote, urlparse
 
 
 def regex_replace(string: str, pattern: str, replacement: str, count: int = 0) -> str:

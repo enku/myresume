@@ -1,4 +1,5 @@
 """Tests for the Jinja2 filters"""
+
 # pylint: disable=missing-docstring
 
 import unittest
