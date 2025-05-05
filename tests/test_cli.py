@@ -19,12 +19,12 @@ with open(os.path.join(PATH, "charlie.yaml"), encoding="utf8") as fp:
 class TestParseArgs(unittest.TestCase):
     def test(self):
         with tempfile.TemporaryDirectory() as tempdir:
-            yaml = os.path.join(tempdir, "myresume.yaml")
-            with open(yaml, "w", encoding="utf8"):
+            yaml_path = os.path.join(tempdir, "myresume.yaml")
+            with open(yaml_path, "w", encoding="utf8"):
                 pass
             pdf = os.path.join(tempdir, "myresume.pdf")
 
-            argv = ["--format=pdf", "--page-size=A4", "--public", yaml, pdf]
+            argv = ["--format=pdf", "--page-size=A4", "--public", yaml_path, pdf]
 
             args = cli.parse_args(argv)
             args.input.close()
@@ -33,7 +33,7 @@ class TestParseArgs(unittest.TestCase):
         self.assertEqual(args.format, "pdf")
         self.assertEqual(args.pagesize, "A4")
         self.assertTrue(args.public)
-        self.assertEqual(args.input.name, yaml)
+        self.assertEqual(args.input.name, yaml_path)
         self.assertEqual(args.output.name, pdf)
 
 
