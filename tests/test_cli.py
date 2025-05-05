@@ -12,7 +12,7 @@ from myresume import cli
 
 PATH = os.path.dirname(__file__)
 
-with open(os.path.join(PATH, "charlie.yaml")) as fp:
+with open(os.path.join(PATH, "charlie.yaml"), encoding="utf8") as fp:
     RESUME_STRUCT = yaml.load(fp, Loader=yaml.SafeLoader)
 
 
@@ -20,7 +20,7 @@ class TestParseArgs(unittest.TestCase):
     def test(self):
         with tempfile.TemporaryDirectory() as tempdir:
             yaml = os.path.join(tempdir, "myresume.yaml")
-            yaml_file = open(yaml, "w")
+            yaml_file = open(yaml, "w", encoding="utf8")
             yaml_file.close()
             pdf = os.path.join(tempdir, "myresume.pdf")
 
@@ -56,7 +56,7 @@ class TestMain(unittest.TestCase):
 
             self.assertTrue(os.path.exists(resume_html))
 
-            with open(resume_html, "r") as html_file:
+            with open(resume_html, "r", encoding="utf8") as html_file:
                 fragment = html_file.read(15)
 
             self.assertEqual(fragment, "<!DOCTYPE html>")
