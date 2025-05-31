@@ -6,7 +6,6 @@ import datetime
 import importlib.metadata
 import io
 import locale
-from typing import List, Tuple, Union
 from urllib.parse import urlparse
 
 import weasyprint
@@ -82,7 +81,7 @@ def filter_dates(entries: list, since: int):
     """Divide `entries` into "current" and "older" according to `since`"""
     from_date = datetime.date(year=since, month=1, day=1)
 
-    divided: Tuple[List, List] = ([], [])  # recent, older
+    divided: tuple[list, list] = ([], [])  # recent, older
 
     for entry in entries:
         ongoing = entry.get("to", "Present") == "Present"
@@ -92,7 +91,7 @@ def filter_dates(entries: list, since: int):
     return divided
 
 
-def to_date(date_spec: Union[int, str]) -> datetime.date:
+def to_date(date_spec: int | str) -> datetime.date:
     """Convert `date_spec` to datetime.
 
     `date_spec` must be either of the format:
