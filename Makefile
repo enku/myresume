@@ -3,6 +3,8 @@ version := $(shell pdm show --version)
 sdist := dist/$(package)-$(version).tar.gz
 wheel := dist/$(package)-$(version)-py3-none-any.whl
 sources := $(shell find $(package) -type f -print)
+tests := $(shell find tests -type f -print)
+python_src := $(filter %.py, $(source) $(tests))
 
 .PHONY:
 build: $(sdist) $(wheel)
@@ -30,5 +32,15 @@ lint:
 	pdm run mypy myresume
 
 
+.fmt: $(python_src)
+	pdm run isort $?
+	pdm run black $?
+	touch $@
+
+
+.PHONY: fmt
+fmt: .fmt
+
+
 clean:
-	rm -rf .coverage build dist htmlcov
+	rm -rf .coverage .fmt build dist htmlcov
