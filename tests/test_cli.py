@@ -11,6 +11,7 @@ import yaml
 
 from myresume import cli
 
+PARSER = cli.build_parser()
 PATH = os.path.dirname(__file__)
 
 with open(os.path.join(PATH, "charlie.yaml"), encoding="utf8") as _fp:
@@ -19,7 +20,7 @@ with open(os.path.join(PATH, "charlie.yaml"), encoding="utf8") as _fp:
 del _fp
 
 
-class TestParseArgs(unittest.TestCase):
+class TestArgumentParser(unittest.TestCase):
     def test(self):
         with tempfile.TemporaryDirectory() as tempdir:
             yaml_path = os.path.join(tempdir, "myresume.yaml")
@@ -29,7 +30,7 @@ class TestParseArgs(unittest.TestCase):
 
             argv = ["--format=pdf", "--page-size=A4", "--public", yaml_path, pdf]
 
-            args = cli.parse_args(argv)
+            args = PARSER.parse_args(argv)
             args.input.close()
             args.output.close()
 

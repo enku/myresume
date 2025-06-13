@@ -15,7 +15,7 @@ THEMES = [i.name for i in importlib.metadata.entry_points(group="myresume.themes
 OUTPUT_CHOICES = {"html", "pdf"}
 
 
-def parse_args(argv) -> argparse.Namespace:
+def build_parser() -> argparse.ArgumentParser:
     """Parse command-line arguments"""
     parser = argparse.ArgumentParser(description="convert resume to html")
     parser.add_argument(
@@ -46,14 +46,13 @@ def parse_args(argv) -> argparse.Namespace:
     parser.add_argument(
         "output", type=argparse.FileType("wb"), default=sys.stdout.buffer
     )
-
-    return parser.parse_args(argv)
+    return parser
 
 
 def main(argv=None) -> int:
     """Entry point"""
-    argv = argv if argv is not None else sys.argv[1:]
-    args = parse_args(argv)
+    parser = build_parser()
+    args = parser.parse_args(argv if argv is not None else sys.argv[1:])
 
     resume_struct = yaml.load(args.input, Loader=yaml.SafeLoader)
 
