@@ -2,7 +2,7 @@ package := $(shell pdm show --name)
 version := $(shell pdm show --version)
 sdist := dist/$(package)-$(version).tar.gz
 wheel := dist/$(package)-$(version)-py3-none-any.whl
-sources := $(shell find $(package) -type f -print)
+sources := $(shell find src/$(package) -type f -print)
 tests := $(shell find tests -type f -print)
 python_src := $(filter %.py, $(source) $(tests))
 
