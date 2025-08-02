@@ -29,7 +29,7 @@ test:
 lint:
 	pdm sync --dev
 	pdm run pylint --rcfile=.pylintrc myresume
-	pdm run mypy myresume
+	pdm run mypy src
 
 
 .fmt: $(python_src)
