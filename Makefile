@@ -21,7 +21,7 @@ $(wheel): $(sources)
 .PHONY: test
 test:
 	pdm sync --dev
-	pdm run coverage run --source=$(package) -mm tests --failfast
+	pdm run coverage run -mm tests --failfast
 	pdm run coverage report
 
 
