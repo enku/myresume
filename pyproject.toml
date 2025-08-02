@@ -48,5 +48,6 @@ dev = [
 skip-magic-trailing-comma = true
 
 [tool.coverage.run]
-source = ["myresume"]
+source = ["myresume", "tests"]
 branch = true
+omit = ["tests/__main__.py"]
