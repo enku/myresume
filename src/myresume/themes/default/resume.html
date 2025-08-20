@@ -109,6 +109,7 @@
     {%- endif %}
     {%- endfor %}
 
+    {% if education -%}
     <div class="heading">Education</div>
     {% for school in education -%}
     <div class="job">
@@ -127,5 +128,6 @@
       </p>
     </div>
     {%- endfor %}
+    {%- endif %}
   </body>
 </html>
