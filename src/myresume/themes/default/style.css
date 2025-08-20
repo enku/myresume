@@ -32,7 +32,6 @@ body {
   position: absolute;
   top: -12px;
   width: 64px;
-  transform: scaleX(-1);
   border: 3px solid #fff;
   border-radius: 12px;
 }
