@@ -4,6 +4,8 @@ This is a program to convert a résumé definition in YAML to HTML or PDF.
 
 This is not **my** résumé (though that is available upon request).
 
+![Screenshot](https://raw.githubusercontent.com/enku/screenshots/refs/heads/master/myresume/screenshot.png)
+
 ## Features
 
   - Output to HTML or PDF
