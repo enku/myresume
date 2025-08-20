@@ -26,6 +26,7 @@ body {
 #logo {
   background-image: url('{{ logo }}');
   background-size: 100% auto;
+  background-repeat: no-repeat;
   display: table-cell;
   height: 64px;
   position: absolute;

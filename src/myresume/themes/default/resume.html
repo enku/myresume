@@ -13,7 +13,7 @@
     </style>
   </head>
   <body>
-    <div id="name"><div id="logo"></div>{{ name.given }} {{ name.middle }} {{ name.surname }}</div>
+    <div id="name">{% if logo %}<div id="logo"></div>{% endif %}{{ name.given }} {{ name.middle }} {{ name.surname }}</div>
 
     <table id="contactInfo">
       <tr>
