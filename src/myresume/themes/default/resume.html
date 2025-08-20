@@ -14,13 +14,6 @@
   </head>
   <body>
     <div id="name"><div id="logo"></div>{{ name.given }} {{ name.middle }} {{ name.surname }}</div>
-    <div id="headline">{{ headline }}</div>
-
-    {%- if summary %}
-    <div id="summary">
-      {{ summary|indent(6) }}
-    </div>
-    {% endif -%}
 
     <table id="contactInfo">
       <tr>
@@ -41,6 +34,14 @@
         </td>
       </tr>
     </table>
+
+    {% if headline %}<div id="headline">{{ headline }}</div>{% endif %}
+
+    {%- if summary %}
+    <div id="summary">
+      {{ summary|indent(6) }}
+    </div>
+    {% endif -%}
 
     <ul class="skills hidden">
       {% for skill in skills -%}
