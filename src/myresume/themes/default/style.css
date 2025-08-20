@@ -157,6 +157,31 @@ ul {
   display: none;
 }
 
+#summary {
+  margin-bottom: 2em;
+}
+
+.skills {
+  list-style-type: none;
+  padding: 0;
+  margin: auto;
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.skill {
+  display: inline-block;
+  color: #000000;
+  background-color: #f0f0f0;
+  padding: 0.6ex 2.5ex;
+  border-radius: 5px;
+  margin: 0.5ex auto;
+}
+
+.skill:last-child {
+    margin-right: 0;
+}
+
 @media print {
   .page-break { display: block; page-break-before: always; }
 

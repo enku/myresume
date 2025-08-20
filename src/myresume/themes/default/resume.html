@@ -43,11 +43,14 @@
     </div>
     {% endif -%}
 
-    <ul class="skills hidden">
+    {% if skills %}
+    <div class="heading">Relevant Skills</div>
+    <ul class="skills">
       {% for skill in skills -%}
-      <li>{{ skill }}</li>
+      <li class="skill">{{ skill }}</li>
       {% endfor %}
     </ul>
+    {% endif %}
 
     {% for section in sections -%}
     <div class="heading">{{ section.title }}</div>
