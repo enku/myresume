@@ -64,7 +64,7 @@
           </td>
           <td class="minor">
             <div class="job_location">{{ job.location }}</div>
-            <div class="job_dates">{{ job.from }} to {{ job.to|default("Present") }}</div>
+            {% if job.from %}<div class="job_dates">{{ job.from }} to {{ job.to|default("Present") }}</div>{% endif %}
           </td>
         </tr>
       </table>
