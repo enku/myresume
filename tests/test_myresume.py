@@ -40,6 +40,14 @@ class TestResume(unittest.TestCase):
             result.startswith(b"%PDF-1.7\n"), f"Output looks weird: {result[:9]}..."
         )
 
+    def test_to_text_renders_test(self):
+        resume = myresume.Resume(RESUME_STRUCT)
+        result = resume.to_text()
+
+        self.assertTrue(
+            result.startswith("Charlie"), f"Output looks weird: {result[:9]}..."
+        )
+
     def test_date_filter(self):
         resume = myresume.Resume(RESUME_STRUCT)
         html = resume.to_html()

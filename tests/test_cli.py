@@ -95,6 +95,32 @@ class TestMain(unittest.TestCase):
 
         self.assertEqual(status, 0)
 
+    def test_writes_text(self) -> None:
+        resume_struct = RESUME_STRUCT.copy()
+        del resume_struct["meta"]
+
+        resume_yaml = yaml.dump(resume_struct)
+
+        with tempfile.TemporaryDirectory() as tempdir:
+            yaml_filename = os.path.join(tempdir, "resume.yaml")
+
+            with open(yaml_filename, "wb") as yaml_file:
+                yaml_file.write(resume_yaml.encode("utf-8"))
+
+            resume_text = os.path.join(tempdir, "resume.txt")
+            argv = ["--format", "text", yaml_filename, resume_text]
+
+            status = cli.main(argv)
+
+            self.assertTrue(os.path.exists(resume_text))
+
+            with open(resume_text, "r", encoding="utf8") as text_file:
+                text = text_file.read()
+
+            self.assertTrue(text.startswith("Charlie Bucket\n\n1212"))
+
+        self.assertEqual(status, 0)
+
     def test_with_meta(self) -> None:
         resume_struct = RESUME_STRUCT.copy()
 

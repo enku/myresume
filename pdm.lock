@@ -5,7 +5,7 @@
 groups = ["default", "dev"]
 strategy = []
 lock_version = "4.5.0"
-content_hash = "sha256:70147789e4eebf2ab27ed6ca358c390b1920f8d4a386d11efbd4f72d8e50c130"
+content_hash = "sha256:d4f93c11331c96a9116cfd7563c476bc8911b1d65988e1a29a3fffbf9bbf2632"
 
 [[metadata.targets]]
 requires_python = ">=3.11"
@@ -366,6 +366,16 @@ files = [
     {file = "fonttools-4.59.0-cp313-cp313-win_amd64.whl", hash = "sha256:26731739daa23b872643f0e4072d5939960237d540c35c14e6a06d47d71ca8fe"},
     {file = "fonttools-4.59.0-py3-none-any.whl", hash = "sha256:241313683afd3baacb32a6bd124d0bce7404bc5280e12e291bae1b9bba28711d"},
     {file = "fonttools-4.59.0.tar.gz", hash = "sha256:be392ec3529e2f57faa28709d60723a763904f71a2b63aabe14fee6648fe3b14"},
+]
+
+[[package]]
+name = "html2text"
+version = "2025.4.15"
+requires_python = ">=3.9"
+summary = "Turn HTML into equivalent Markdown-structured text."
+files = [
+    {file = "html2text-2025.4.15-py3-none-any.whl", hash = "sha256:00569167ffdab3d7767a4cdf589b7f57e777a5ed28d12907d8c58769ec734acc"},
+    {file = "html2text-2025.4.15.tar.gz", hash = "sha256:948a645f8f0bc3abe7fd587019a2197a12436cd73d0d4908af95bfc8da337588"},
 ]
 
 [[package]]

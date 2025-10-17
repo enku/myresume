@@ -10,6 +10,7 @@ from urllib.parse import urlparse
 
 import weasyprint
 import weasyprint.text.fonts
+from html2text import html2text
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 from . import filters
@@ -75,6 +76,12 @@ class Resume:
         document.write_pdf(target)
 
         return target.getvalue()
+
+    def to_text(self, theme="default") -> str:
+        """Return resume as (markdown) text"""
+        html = self.to_html(theme)
+
+        return html2text(html)
 
 
 def filter_dates(entries: list, since: int):

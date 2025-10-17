@@ -12,7 +12,7 @@ from . import Resume
 THEMES = [i.name for i in importlib.metadata.entry_points(group="myresume.themes")]
 
 # Output formats
-OUTPUT_CHOICES = {"html", "pdf"}
+OUTPUT_CHOICES = {"html", "pdf", "text"}
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -66,8 +66,10 @@ def main(argv=None) -> int:
 
     if args.format == "html":
         args.output.write(resume.to_html(args.theme).encode("utf-8"))
-    else:
+    elif args.format == "pdf":
         args.output.write(resume.to_pdf(args.theme, args.pagesize))
+    else:
+        args.output.write(resume.to_text(args.theme).encode("utf-8"))
 
     args.input.close()
     args.output.close()
