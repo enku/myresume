@@ -14,7 +14,7 @@ PATH = os.path.dirname(__file__)
 with open(os.path.join(PATH, "charlie.yaml"), encoding="UTF8") as fp:
     RESUME_STRUCT = yaml.load(fp, Loader=yaml.SafeLoader)
 
-locale.setlocale(locale.LC_ALL, "en_US")
+locale.setlocale(locale.LC_ALL, "en_US.UTF-8")
 
 
 class TestResume(unittest.TestCase):
