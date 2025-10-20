@@ -28,6 +28,7 @@ myresume = "myresume.cli:main"
 
 [project.entry-points."myresume.themes"]
 default = "myresume.themes.default"
+plain = "myresume.themes.plain"
 
 [build-system]
 requires = [

@@ -25,7 +25,7 @@ pip install git+https://github.com/enku/myresume
 ## Usage
 
 ```
-usage: myresume [-h] [--since SINCE] [--format {html,pdf}] [--theme {default}]
+usage: myresume [-h] [--since SINCE] [--format {html,pdf}] [--theme {default,plain}]
                 [--public] [--page-size PAGESIZE]
                 input output
 
@@ -39,7 +39,7 @@ optional arguments:
   -h, --help            show this help message and exit
   --since SINCE         Filter out entries before this year
   --format {html,pdf}   Output format (default: html)
-  --theme {default}
+  --theme {default,plain}
   --public              Make for public consumption by excluding address and
                         phone
   --page-size PAGESIZE  Page size (e.g. for PDF)

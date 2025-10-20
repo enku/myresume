@@ -1,0 +1,104 @@
+* {
+  box-sizing: border-box;
+  moz-box-sizing: border-box;
+  padding: 0;
+}
+
+@page {
+  margin: 0.70in 1.00in;
+  background-color: white;
+}
+
+@media screen {
+    body {
+        margin: 0.7in auto;
+        width: 8.5in;
+    }
+}
+
+body {
+  background-color: white;
+  color: black;
+  font-family: "Noto Sans", "Arial", "Verdana", sans-serif;
+  font-size: 10pt;
+}
+
+.name {
+  font-family: "Ubuntu", "Noto Sans", "Arial", "Verdana", sans-serif;
+  font-size: 24pt;
+  font-weight: 600;
+}
+
+a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.links .link,
+.link a {
+  display: inline;
+  color: #606060;
+  font-size: 9pt;
+}
+
+.head {
+  font-family: "Ubuntu", "Noto Sans", "Arial", "Verdana", sans-serif;
+  font-weight: 600;
+  font-size: 14pt;
+  border-bottom: 1px solid #a9a9a9;
+  padding-bottom: 2px;
+}
+
+.summary {
+  text-align: justify;
+  text-justification: newspaper;
+}
+
+.section .title {
+  font-family: "Ubuntu", "Noto Sans", "Arial", "Verdana", sans-serif;
+  font-weight: 600;
+  font-size: 14pt;
+  margin: 0.5ex 0;
+  border-bottom: 1px solid #a9a9a9;
+  padding-bottom: 2px;
+}
+
+.entry, .skills, .summary, .links {
+  margin-bottom: 0.2in;
+}
+
+.entry .role, .degree {
+  font-weight: 600;
+  font-family: "Noto Sans", "Arial", "Verdana", sans-serif;
+  font-size: 12pt;
+}
+
+.entry .org {
+  font-weight: 600;
+}
+
+.entry .org, .entry .location {
+  display: inline;
+}
+
+.dates {
+  font-size: 9pt;
+}
+
+.fromDate, .toDate {
+  display: inline;
+}
+
+.entry .duties {
+  text-align: justify;
+  text-justification: newspaper;
+}
+
+.skills .skill {
+  display: inline;
+}
+
+.education .institution .location,
+.education .institution .institutionName {
+  display: inline;
+}

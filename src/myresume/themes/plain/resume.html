@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="myresume {{ meta.myresume.version }}" />
+    <base target="_blank" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <title>{{ name.given }} {{ name.surname }}</title>
+    <style type="text/css">
+{%- filter indent(width=8) %}
+{% include "style.css" %}
+{%- endfilter %}
+    </style>
+  </head>
+  <body>
+  <div class="name">
+    <span class="given_name">{{ name.given }}</span>
+    <span class="surname_name">{{ name.surname }}</span>
+  </div>
+
+  {% if not meta.public %}
+  <div class="contactInfo">{{ contactInfo.address }}</div>
+  {% endif %}
+
+  {% if links %}
+  <div class="links">
+    {% for link in links %}
+    <div class="link">{{ link.name }}: <a href="{{ link.url }}">{{ link.url|pretty_url }}</a></div>
+    {% if not loop.last %}
+    <span> &middot; </span>
+    {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if summary %}
+  <div class="summary">
+    <div class="head">Professional Summary</div>
+    {{ summary }}
+  </div>
+  {% endif %}
+
+  {% if sections %}
+  <div class="sections">
+    {% for section in sections %}
+    <div class="section {{ section.title|slugify }}">
+      <div class="title">{{ section.title }}</div>
+      {% if section.entries %}
+      <div class="entries">
+        {% for entry in section.entries %}
+        <div class="entry {{ entry.org|slugify }}">
+          {% if entry.role %}
+          <div class="role">{{ entry.role }}</div>
+          {% endif %}
+          {% if entry.org %}
+          {% if entry.url %}
+          <div class="org"><a href="{{ entry.url }}">{{ entry.org }}</a></div>
+          {% else %}
+          <div class="org">{{ entry.org }}</div>
+          {% endif %}
+          {% endif %}
+          {% if entry.location %}
+          <span> &mdash; </span><div class="location">{{ entry.location }}</div>
+          {% endif %}
+
+          {% if entry.from %}
+          <div class="dates">
+            <div class="fromDate">{{ entry.from }}</div> to <div class="toDate"> {% if entry.to%} {{ entry.to }} {% else %} Present {% endif %} </div>
+          </div>
+          {% endif %}
+
+          {% if entry.duties %}
+          <ul class="duties">
+            {% for duty in entry.duties %}
+            <li class="duty">
+              {{ duty }}
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if skills %}
+  <div class="head">Skills</div>
+  <ul class="skills">
+    {% for skill in skills %}
+    <li class="skill">{{ skill }}</li>
+    {% if not loop.last %}
+    <span> &middot; </span>
+    {% endif %}
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  {% if education %}
+  <div class="education">
+    <div class="head">Education</div>
+    {% for entry in education %}
+    <div class="institution">
+      {% if entry.degree %}
+      <div class="degree">{{ entry.degree }}</div>
+      {% endif %}
+      {% if entry.url %}
+      <div class="institutionName"><a href="{{ entry.url }}">{{ entry.institution }}</a></div>
+      {% else %}
+      {% endif %}
+      {% if entry.location %}
+      <span> &mdash; </span>
+      <div class="location">{{ entry.location }}</div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</html>
