@@ -8,6 +8,7 @@ import io
 import locale
 from urllib.parse import urlparse
 
+import slugify
 import weasyprint
 import weasyprint.text.fonts
 from html2text import html2text
@@ -58,6 +59,7 @@ class Resume:
         )
         env.filters["regex_replace"] = filters.regex_replace
         env.filters["pretty_url"] = filters.pretty_url
+        env.filters["slugify"] = slugify.slugify
         template = env.get_template("resume.html")
 
         return template.render(self.context)
