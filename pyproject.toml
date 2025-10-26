@@ -31,13 +31,13 @@ default = "myresume.themes.default"
 plain = "myresume.themes.plain"
 
 [build-system]
-requires = [
-    "pdm-pep517>=1.0.0"
-]
-
-build-backend = "pdm.pep517.api"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
 
 [tool.pdm]
+distribution = true
+version = { source = "scm" }
+
 [tool.pdm.dev-dependencies]
 dev = [
     "coverage>=6.4.4",
