@@ -4,7 +4,6 @@
 
 import os.path
 import unittest
-from unittest.mock import patch
 
 import yaml
 from unittest_fixtures import Fixtures, given
@@ -45,7 +44,7 @@ class TestArgumentParser(unittest.TestCase):
         self.assertEqual(args.output.name, pdf)
 
 
-@given(lib.tempdir)
+@given(lib.tempdir, lib.to_pdf)
 class TestMain(unittest.TestCase):
     def test_writes_html(self, fixtures: Fixtures) -> None:
         tempdir = fixtures.tempdir
@@ -87,9 +86,8 @@ class TestMain(unittest.TestCase):
         resume_pdf = os.path.join(tempdir, "resume.pdf")
         argv = ["--format", "pdf", yaml_filename, resume_pdf]
 
-        with patch.object(cli.Resume, "to_pdf") as mock_to_pdf:
-            mock_to_pdf.return_value = b"%PDF-1.4"
-            status = cli.main(argv)
+        fixtures.to_pdf.return_value = b"%PDF-1.4"
+        status = cli.main(argv)
 
         self.assertTrue(os.path.exists(resume_pdf))
 
