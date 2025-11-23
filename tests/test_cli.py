@@ -38,11 +38,11 @@ class TestArgumentParser(unittest.TestCase):
         self.assertEqual(args.output.name, pdf)
 
 
-@given(lib.tempdir, lib.to_pdf)
+@given(lib.tempdir, lib.to_pdf, lib.resume_struct)
 class TestMain(unittest.TestCase):
     def test_writes_html(self, fixtures: Fixtures) -> None:
         tempdir = fixtures.tempdir
-        resume_struct = lib.RESUME_STRUCT.copy()
+        resume_struct = fixtures.resume_struct
         del resume_struct["meta"]
 
         resume_yaml = yaml.dump(resume_struct)
@@ -67,7 +67,7 @@ class TestMain(unittest.TestCase):
 
     def test_writes_pdf(self, fixtures: Fixtures) -> None:
         tempdir = fixtures.tempdir
-        resume_struct = lib.RESUME_STRUCT.copy()
+        resume_struct = fixtures.resume_struct
         del resume_struct["meta"]
 
         resume_yaml = yaml.dump(resume_struct)
@@ -94,7 +94,7 @@ class TestMain(unittest.TestCase):
 
     def test_writes_text(self, fixtures: Fixtures) -> None:
         tempdir = fixtures.tempdir
-        resume_struct = lib.RESUME_STRUCT.copy()
+        resume_struct = fixtures.resume_struct
         del resume_struct["meta"]
 
         resume_yaml = yaml.dump(resume_struct)
@@ -120,7 +120,7 @@ class TestMain(unittest.TestCase):
 
     def test_with_meta(self, fixtures: Fixtures) -> None:
         tempdir = fixtures.tempdir
-        resume_struct = lib.RESUME_STRUCT.copy()
+        resume_struct = fixtures.resume_struct
 
         resume_yaml = yaml.dump(resume_struct)
 

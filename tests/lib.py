@@ -3,6 +3,8 @@
 # pylint: disable=missing-docstring
 import os
 import tempfile
+from copy import deepcopy
+from typing import Any
 from unittest import mock
 
 import yaml
@@ -25,3 +27,8 @@ def tempdir(_: Fixtures) -> FixtureContext[str]:
 def to_pdf(_: Fixtures) -> FixtureContext[mock.Mock]:
     with mock.patch("myresume.cli.Resume.to_pdf") as mock_to_pdf:
         yield mock_to_pdf
+
+
+@fixture()
+def resume_struct(_: Fixtures) -> dict[str, Any]:
+    return deepcopy(RESUME_STRUCT)

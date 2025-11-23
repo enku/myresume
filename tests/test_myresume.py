@@ -2,7 +2,8 @@
 import datetime
 import locale
 import unittest
-from copy import deepcopy
+
+from unittest_fixtures import Fixtures, given
 
 import myresume
 
@@ -11,14 +12,15 @@ from . import lib
 locale.setlocale(locale.LC_ALL, "en_US.UTF-8")
 
 
+@given(lib.resume_struct)
 class TestResume(unittest.TestCase):
-    def test_init_saves_copy_of_struct(self):
-        resume = myresume.Resume(lib.RESUME_STRUCT)
+    def test_init_saves_copy_of_struct(self, fixtures: Fixtures) -> None:
+        resume = myresume.Resume(fixtures.resume_struct)
 
-        self.assertIsNot(lib.RESUME_STRUCT, resume.context)
+        self.assertIsNot(fixtures.resume_struct, resume.context)
 
-    def test_to_html_renders_html(self):
-        resume = myresume.Resume(lib.RESUME_STRUCT)
+    def test_to_html_renders_html(self, fixtures: Fixtures) -> None:
+        resume = myresume.Resume(fixtures.resume_struct)
         result = resume.to_html()
 
         self.assertTrue(
@@ -26,30 +28,30 @@ class TestResume(unittest.TestCase):
             f"Output looks weird: {result[:20]}...",
         )
 
-    def test_to_pdf_renders_pdf(self):
-        resume = myresume.Resume(lib.RESUME_STRUCT)
+    def test_to_pdf_renders_pdf(self, fixtures: Fixtures) -> None:
+        resume = myresume.Resume(fixtures.resume_struct)
         result = resume.to_pdf()
 
         self.assertTrue(
             result.startswith(b"%PDF-1.7\n"), f"Output looks weird: {result[:9]}..."
         )
 
-    def test_to_text_renders_test(self):
-        resume = myresume.Resume(lib.RESUME_STRUCT)
+    def test_to_text_renders_text(self, fixtures: Fixtures) -> None:
+        resume = myresume.Resume(fixtures.resume_struct)
         result = resume.to_text()
 
         self.assertTrue(
             result.startswith("Charlie"), f"Output looks weird: {result[:9]}..."
         )
 
-    def test_date_filter(self):
-        resume = myresume.Resume(lib.RESUME_STRUCT)
+    def test_date_filter(self, fixtures: Fixtures) -> None:
+        resume = myresume.Resume(fixtures.resume_struct)
         html = resume.to_html()
 
         self.assertNotIn("Chocolatier", html)
 
-    def test_privacy_filter(self):
-        struct = lib.RESUME_STRUCT.copy()
+    def test_privacy_filter(self, fixtures: Fixtures) -> None:
+        struct = fixtures.resume_struct
         struct["meta"]["public"] = True
         context = myresume.Resume(struct).context
 
@@ -59,21 +61,22 @@ class TestResume(unittest.TestCase):
             [{"name": "Social", "url": "https://spitter.invalid/charlie/"}],
         )
 
-    def test_str(self):
-        resume = myresume.Resume(lib.RESUME_STRUCT)
+    def test_str(self, fixtures: Fixtures) -> None:
+        resume = myresume.Resume(fixtures.resume_struct)
 
         self.assertEqual(str(resume), resume.to_html())
 
-    def test_context_should_contain_myresume_version(self):
-        resume = myresume.Resume(lib.RESUME_STRUCT)
+    def test_context_should_contain_myresume_version(self, fixtures: Fixtures) -> None:
+        resume = myresume.Resume(fixtures.resume_struct)
 
         expected = myresume.version()
         self.assertEqual(resume.context["meta"]["myresume"]["version"], expected)
 
 
+@given(lib.resume_struct)
 class TestFilterDates(unittest.TestCase):
-    def test(self):
-        entries = lib.RESUME_STRUCT["sections"][0]["entries"]
+    def test(self, fixtures: Fixtures) -> None:
+        entries = fixtures.resume_struct["sections"][0]["entries"]
 
         recent, old = myresume.filter_dates(entries, 2007)
 
@@ -83,8 +86,8 @@ class TestFilterDates(unittest.TestCase):
         self.assertEqual(old[0]["role"], "Chocolatier")
         self.assertEqual(recent[0]["role"], "Programmer")
 
-    def test_when_to_is_present_goes_to_current(self):
-        entries = deepcopy(lib.RESUME_STRUCT["sections"][0]["entries"])
+    def test_when_to_is_present_goes_to_current(self, fixtures: Fixtures) -> None:
+        entries = fixtures.resume_struct["sections"][0]["entries"]
         del entries[-1]["to"]
 
         recent = myresume.filter_dates(entries, 2007)[0]
