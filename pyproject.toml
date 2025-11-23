@@ -38,15 +38,6 @@ build-backend = "pdm.backend"
 distribution = true
 version = { source = "scm" }
 
-[tool.pdm.dev-dependencies]
-dev = [
-    "coverage>=6.4.4",
-    "black>=22.8.0",
-    "mypy>=0.971",
-    "pylint>=2.15.3",
-    "types-PyYAML>=6.0.12.12",
-]
-
 [tool.black]
 skip-magic-trailing-comma = true
 
@@ -61,3 +52,13 @@ bad-functions = "print"
 
 [tool.pylint.variables]
 init-import = "yes"
+
+[dependency-groups]
+dev = [
+    "coverage>=6.4.4",
+    "black>=22.8.0",
+    "mypy>=0.971",
+    "pylint>=2.15.3",
+    "types-PyYAML>=6.0.12.12",
+    "unittest-fixtures>=2.3.0",
+]
