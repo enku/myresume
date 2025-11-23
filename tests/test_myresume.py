@@ -1,30 +1,24 @@
 # pylint: disable=missing-docstring
 import datetime
 import locale
-import os.path
 import unittest
 from copy import deepcopy
 
-import yaml
-
 import myresume
 
-PATH = os.path.dirname(__file__)
-
-with open(os.path.join(PATH, "charlie.yaml"), encoding="UTF8") as fp:
-    RESUME_STRUCT = yaml.load(fp, Loader=yaml.SafeLoader)
+from . import lib
 
 locale.setlocale(locale.LC_ALL, "en_US.UTF-8")
 
 
 class TestResume(unittest.TestCase):
     def test_init_saves_copy_of_struct(self):
-        resume = myresume.Resume(RESUME_STRUCT)
+        resume = myresume.Resume(lib.RESUME_STRUCT)
 
-        self.assertIsNot(RESUME_STRUCT, resume.context)
+        self.assertIsNot(lib.RESUME_STRUCT, resume.context)
 
     def test_to_html_renders_html(self):
-        resume = myresume.Resume(RESUME_STRUCT)
+        resume = myresume.Resume(lib.RESUME_STRUCT)
         result = resume.to_html()
 
         self.assertTrue(
@@ -33,7 +27,7 @@ class TestResume(unittest.TestCase):
         )
 
     def test_to_pdf_renders_pdf(self):
-        resume = myresume.Resume(RESUME_STRUCT)
+        resume = myresume.Resume(lib.RESUME_STRUCT)
         result = resume.to_pdf()
 
         self.assertTrue(
@@ -41,7 +35,7 @@ class TestResume(unittest.TestCase):
         )
 
     def test_to_text_renders_test(self):
-        resume = myresume.Resume(RESUME_STRUCT)
+        resume = myresume.Resume(lib.RESUME_STRUCT)
         result = resume.to_text()
 
         self.assertTrue(
@@ -49,13 +43,13 @@ class TestResume(unittest.TestCase):
         )
 
     def test_date_filter(self):
-        resume = myresume.Resume(RESUME_STRUCT)
+        resume = myresume.Resume(lib.RESUME_STRUCT)
         html = resume.to_html()
 
         self.assertNotIn("Chocolatier", html)
 
     def test_privacy_filter(self):
-        struct = RESUME_STRUCT.copy()
+        struct = lib.RESUME_STRUCT.copy()
         struct["meta"]["public"] = True
         context = myresume.Resume(struct).context
 
@@ -66,12 +60,12 @@ class TestResume(unittest.TestCase):
         )
 
     def test_str(self):
-        resume = myresume.Resume(RESUME_STRUCT)
+        resume = myresume.Resume(lib.RESUME_STRUCT)
 
         self.assertEqual(str(resume), resume.to_html())
 
     def test_context_should_contain_myresume_version(self):
-        resume = myresume.Resume(RESUME_STRUCT)
+        resume = myresume.Resume(lib.RESUME_STRUCT)
 
         expected = myresume.version()
         self.assertEqual(resume.context["meta"]["myresume"]["version"], expected)
@@ -79,7 +73,7 @@ class TestResume(unittest.TestCase):
 
 class TestFilterDates(unittest.TestCase):
     def test(self):
-        entries = RESUME_STRUCT["sections"][0]["entries"]
+        entries = lib.RESUME_STRUCT["sections"][0]["entries"]
 
         recent, old = myresume.filter_dates(entries, 2007)
 
@@ -90,7 +84,7 @@ class TestFilterDates(unittest.TestCase):
         self.assertEqual(recent[0]["role"], "Programmer")
 
     def test_when_to_is_present_goes_to_current(self):
-        entries = deepcopy(RESUME_STRUCT["sections"][0]["entries"])
+        entries = deepcopy(lib.RESUME_STRUCT["sections"][0]["entries"])
         del entries[-1]["to"]
 
         recent = myresume.filter_dates(entries, 2007)[0]

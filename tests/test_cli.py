@@ -13,12 +13,6 @@ from myresume import cli
 from . import lib
 
 PARSER = cli.build_parser()
-PATH = os.path.dirname(__file__)
-
-with open(os.path.join(PATH, "charlie.yaml"), encoding="utf8") as _fp:
-    RESUME_STRUCT = yaml.load(_fp, Loader=yaml.SafeLoader)
-
-del _fp
 
 
 @given(lib.tempdir)
@@ -48,7 +42,7 @@ class TestArgumentParser(unittest.TestCase):
 class TestMain(unittest.TestCase):
     def test_writes_html(self, fixtures: Fixtures) -> None:
         tempdir = fixtures.tempdir
-        resume_struct = RESUME_STRUCT.copy()
+        resume_struct = lib.RESUME_STRUCT.copy()
         del resume_struct["meta"]
 
         resume_yaml = yaml.dump(resume_struct)
@@ -73,7 +67,7 @@ class TestMain(unittest.TestCase):
 
     def test_writes_pdf(self, fixtures: Fixtures) -> None:
         tempdir = fixtures.tempdir
-        resume_struct = RESUME_STRUCT.copy()
+        resume_struct = lib.RESUME_STRUCT.copy()
         del resume_struct["meta"]
 
         resume_yaml = yaml.dump(resume_struct)
@@ -100,7 +94,7 @@ class TestMain(unittest.TestCase):
 
     def test_writes_text(self, fixtures: Fixtures) -> None:
         tempdir = fixtures.tempdir
-        resume_struct = RESUME_STRUCT.copy()
+        resume_struct = lib.RESUME_STRUCT.copy()
         del resume_struct["meta"]
 
         resume_yaml = yaml.dump(resume_struct)
@@ -126,7 +120,7 @@ class TestMain(unittest.TestCase):
 
     def test_with_meta(self, fixtures: Fixtures) -> None:
         tempdir = fixtures.tempdir
-        resume_struct = RESUME_STRUCT.copy()
+        resume_struct = lib.RESUME_STRUCT.copy()
 
         resume_yaml = yaml.dump(resume_struct)
 
