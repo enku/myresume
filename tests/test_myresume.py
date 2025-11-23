@@ -12,15 +12,13 @@ from . import lib
 locale.setlocale(locale.LC_ALL, "en_US.UTF-8")
 
 
-@given(lib.resume_struct)
+@given(lib.resume)
 class TestResume(unittest.TestCase):
     def test_init_saves_copy_of_struct(self, fixtures: Fixtures) -> None:
-        resume = myresume.Resume(fixtures.resume_struct)
-
-        self.assertIsNot(fixtures.resume_struct, resume.context)
+        self.assertIsNot(fixtures.resume_struct, fixtures.resume.context)
 
     def test_to_html_renders_html(self, fixtures: Fixtures) -> None:
-        resume = myresume.Resume(fixtures.resume_struct)
+        resume = fixtures.resume
         result = resume.to_html()
 
         self.assertTrue(
@@ -29,7 +27,7 @@ class TestResume(unittest.TestCase):
         )
 
     def test_to_pdf_renders_pdf(self, fixtures: Fixtures) -> None:
-        resume = myresume.Resume(fixtures.resume_struct)
+        resume = fixtures.resume
         result = resume.to_pdf()
 
         self.assertTrue(
@@ -37,7 +35,7 @@ class TestResume(unittest.TestCase):
         )
 
     def test_to_text_renders_text(self, fixtures: Fixtures) -> None:
-        resume = myresume.Resume(fixtures.resume_struct)
+        resume = fixtures.resume
         result = resume.to_text()
 
         self.assertTrue(
@@ -45,7 +43,7 @@ class TestResume(unittest.TestCase):
         )
 
     def test_date_filter(self, fixtures: Fixtures) -> None:
-        resume = myresume.Resume(fixtures.resume_struct)
+        resume = fixtures.resume
         html = resume.to_html()
 
         self.assertNotIn("Chocolatier", html)
@@ -62,7 +60,7 @@ class TestResume(unittest.TestCase):
         )
 
     def test_str(self, fixtures: Fixtures) -> None:
-        resume = myresume.Resume(fixtures.resume_struct)
+        resume = fixtures.resume
 
         self.assertEqual(str(resume), resume.to_html())
 

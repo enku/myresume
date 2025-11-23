@@ -10,6 +10,8 @@ from unittest import mock
 import yaml
 from unittest_fixtures import FixtureContext, Fixtures, fixture
 
+import myresume
+
 PATH = os.path.dirname(__file__)
 with open(os.path.join(PATH, "charlie.yaml"), encoding="utf8") as _fp:
     RESUME_STRUCT = yaml.load(_fp, Loader=yaml.SafeLoader)
@@ -32,3 +34,8 @@ def to_pdf(_: Fixtures) -> FixtureContext[mock.Mock]:
 @fixture()
 def resume_struct(_: Fixtures) -> dict[str, Any]:
     return deepcopy(RESUME_STRUCT)
+
+
+@fixture(resume_struct)
+def resume(fixtures: Fixtures) -> myresume.Resume:
+    return myresume.Resume(fixtures.resume_struct)
