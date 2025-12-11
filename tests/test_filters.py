@@ -51,3 +51,10 @@ class TestPrettyUrl(unittest.TestCase):
         result = filters.pretty_url(url)
 
         self.assertEqual(result, "212•555•1212")
+
+    def test_tel_url_custom_dash(self):
+        url = "tel:212-555-1212"
+
+        result = filters.pretty_url(url, dash=".")
+
+        self.assertEqual(result, "212.555.1212")
