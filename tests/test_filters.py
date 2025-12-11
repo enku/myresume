@@ -45,7 +45,7 @@ class TestPrettyUrl(unittest.TestCase):
 
         self.assertEqual(result, "bighost.invalid/foo")
 
-    def test_test_tel_url(self):
+    def test_tel_url(self):
         url = "tel:212-555-1212"
 
         result = filters.pretty_url(url)
