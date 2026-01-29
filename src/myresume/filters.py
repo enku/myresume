@@ -6,6 +6,8 @@ These are Jinja2 template filters that can be used in theme templates.
 import re
 from urllib.parse import unquote, urlparse
 
+WEB_SCHEME_PORTS: tuple[tuple[str, str], ...] = (("http", "80"), ("https", "443"))
+
 
 def regex_replace(string: str, pattern: str, replacement: str, count: int = 0) -> str:
     """Regex replace"""
@@ -22,7 +24,7 @@ def pretty_url(url: str, dash: str = "•") -> str:
 
     address, colon, port = parsed.netloc.partition(":")
 
-    if colon and (parsed.scheme, port) not in [("http", "80"), ("https", "443")]:
+    if colon and (parsed.scheme, port) not in WEB_SCHEME_PORTS:
         address = f"{address}:{port}"
 
     if parsed.scheme == "tel":
